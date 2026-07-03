@@ -48,6 +48,20 @@ main {
     border-color: #A7F3D0;
 }
 
+#submit-name {
+    background-color:#BBF7D0;
+    color:#1A1A2E;
+    border: none;
+    border-radius: 25px;
+    padding: 0.8rem;
+    cursor: pointer;
+    width: auto;
+    font-weight: bold;
+
+}
+#submit-name:hover {
+    background-color: #A7F3D0;
+}
 .name-input{
     display: flex;
     flex-direction: column;
@@ -73,6 +87,7 @@ main {
     padding: 0.8rem;
     cursor: pointer;
     width: auto;
+    font-weight: bold;
 }
 
 .mood-buttons:hover {
