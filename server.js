@@ -10,7 +10,8 @@ app.get('/api/users', function(req, res) {
     fetch(`https://api.jsonbin.io/v3/b/${process.env.JSONBIN_BIN_ID}`, {
         method: 'GET',
         headers:{
-            'X-Access-Key': process.env.JSONBIN_KEY
+            'X-Access-Key': process.env.JSONBIN_KEY,
+            'X-Bin-Private': 'true'
         }
     })
     .then(function(response) {
@@ -30,7 +31,8 @@ app.post('/api/users', function(req, res) {
     fetch(`https://api.jsonbin.io/v3/b/${process.env.JSONBIN_BIN_ID}`, {
         method: 'GET',
         headers: {
-            'X-Access-Key': process.env.JSONBIN_KEY
+            'X-Access-Key': process.env.JSONBIN_KEY,
+            'X-Bin-Private': 'true'
         }
 
     })
@@ -43,6 +45,7 @@ app.post('/api/users', function(req, res) {
             method: 'PUT',
             headers: {
                 'X-Access-Key': process.env.JSONBIN_KEY,
+                'X-Bin-Private': 'true',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ users: [...users, newUser] })
