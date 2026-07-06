@@ -94,3 +94,12 @@ main {
     background-color: #A7F3D0;
 }
 
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+
+    #name {
+        width: 100%;
+    }
+}

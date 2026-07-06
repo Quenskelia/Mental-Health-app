@@ -55,11 +55,14 @@ app.post('/api/users', function(req, res) {
         return response.json();
     })
     .then(function(data) {
-        res.json(data);
+       res.json(data);
     })
+    
+    
     .catch(function(error) {
         console.error('Error creating user:', error);
         res.status(500).json({ error: 'An error occurred while creating the user.' });
+    
     }); 
 });
 
