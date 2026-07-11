@@ -1,23 +1,40 @@
+var selectedMood = null;
+var isReturningUser = false;
 document.addEventListener("DOMContentLoaded",()=>{
     fetch('/api/users')
         .then(response => response.json())
-        fetch('/api/users')
-    .then(response => {
-        console.log('Response status:', response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log('Frontend received:', data);
-        var userArray = data.record.users;
+        .then(data => {
+        var userArray = data.users;
             if (userArray.length > 0){
+                isReturningUser = true;
                 document.getElementById('main-title').textContent ="Welcome Back Friend!";
                 document.getElementById('naming').style.display='none';
-            } else {
-                console.log("No users found.");
             }
-           
-        })
+        });
+    document.querySelectorAll('.mood-buttons').forEach(button => {
+    button.addEventListener('click', () => {
+        selectedMood = button.id;
+        document.querySelectorAll('.mood-buttons').forEach(b => {
+            b.classList.remove('active');
+        });
+        button.classList.add('active');
+        if (isReturningUser){
+            fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mood: selectedMood })
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = 'app.html';
+            });
+        }
     })
+        });
+});
+
 
 
 document.getElementById('submit-name').addEventListener('click', () => {
@@ -26,13 +43,17 @@ document.getElementById('submit-name').addEventListener('click', () => {
         alert("Please enter your name!");
         return;
     }
+    if (selectedMood === null){
+        alert("Please select your mood!");
+        return;
+    }
 
     fetch('/api/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: nameInput })
+        body: JSON.stringify({ name: nameInput, mood: selectedMood  })
     })
     .then(response => response.json())
     .then(data => {

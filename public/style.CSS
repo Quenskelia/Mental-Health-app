@@ -93,6 +93,10 @@ main {
 .mood-buttons:hover {
     background-color: #A7F3D0;
 }
+.mood-buttons.active {
+    background-color: #C4B5FD;
+    color: #1A1A2E;
+}
 
 @media (max-width: 600px) {
     body {
