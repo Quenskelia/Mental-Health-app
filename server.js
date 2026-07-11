@@ -46,6 +46,25 @@ app.post('/api/users', function(req, res) {
         res.status(500).json({ error: 'Failed to save user' });
     }
 });
+function initializeStorage() {
+    try {
+    if(!fs.existsSync(usersFilePath)) {
+        fs.writeFileSync(usersFilePath, JSON.stringify({ users: [] }, null, 2));
+        console.log('user.json recreated');
+        return;
+    }
+    var data = fs.readFileSync(usersFilePath, 'utf8');
+    var parsed = JSON.parse(data);
+    if (!parsed.users) {
+        fs.writeFileSync(usersFilePath, JSON.stringify( { users: [] }, null, 2));
+        console.log('user.json repaired');
+    }
+} catch (error) {
+    fs.writeFileSync(usersFilePath, JSON.stringify({ users: []}, null, 2));
+    console.log('users.json was corrupted and has been recreated.');
+    }
+}
+initializeStorage();
 app.listen(port, function() {
     console.log(`Server is running on http://localhost:${port}`);
 });
