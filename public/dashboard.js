@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded",()=>{
             var moodHistory = user.moodHistory;
             document.getElementById('greeting').textContent = 'Hello ' + user.name + '! I hope your day is going well.';
             buildWeeklyOverview(moodHistory);
+            var todaysMood = moodHistory[moodHistory.length -1].mood;
+            console.log('Todays mood:', todaysMood);
         });
     });
     
@@ -16,16 +18,21 @@ document.addEventListener("DOMContentLoaded",()=>{
             day.setDate(today.getDate() - i);
             var dateString = day.toISOString().split('T')[0];
             var dayName = day.toLocaleDateString('en-US', { weekday : 'short'});
-            console.log(dateString);
-            console.log(dayName);
             var entry = moodHistory.find(function(e){
                 return e.date === dateString;
+                
             });
              var moodText = entry ? entry.mood : 'No entry';
              var card = document.createElement('div');
              card.classList.add('day-card');
+
+             if (!entry){
+                    card.classList.add('empty-card');
+                }
+
              card.innerHTML = '<p>' + dayName + '</p><p>' + moodText + '</p>';
              document.getElementById('week-grid').appendChild(card);
         }
 
     }
+    
