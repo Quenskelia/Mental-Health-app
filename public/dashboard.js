@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             document.getElementById('greeting').textContent = 'Hello ' + user.name + '! I hope your day is going well.';
             buildWeeklyOverview(moodHistory);
             var todaysMood = moodHistory[moodHistory.length -1].mood;
+            getSuggestion(todaysMood);
             console.log('Todays mood:', todaysMood);
         });
     });
@@ -33,6 +34,36 @@ document.addEventListener("DOMContentLoaded",()=>{
              card.innerHTML = '<p>' + dayName + '</p><p>' + moodText + '</p>';
              document.getElementById('week-grid').appendChild(card);
         }
-
     }
-    
+    function getSuggestion(mood){
+        if (mood === 'happy'){
+            fetch('/api/activity')
+            .then(response => response.json())
+            .then(data =>{
+                var activity = data.activity;
+                var type = data.type;
+                document.getElementById('suggestion-content').innerHTML = '<p>' + activity + '</p><p>Type: ' + type + '</p>';
+            })
+
+        }else if (mood === 'okay'){
+            fetch('/api/quote')
+            .then(response => response.json())
+            .then(data =>{
+                var quote = data[0].q;
+                var author = data[0].a;
+                document.getElementById('suggestion-content').innerHTML = '<p>"' + quote + '"</p><p>-' + author + '</p>'
+        })
+
+        }else if (mood === 'low'){
+
+        }else if (mood === 'stressed'){
+              fetch('/api/quote')
+            .then(response => response.json())
+            .then(data => {
+                var quote = data[0].q;
+                var author = data[0].a;
+                document.getElementById('suggestion-content').innerHTML = '<p>"' + quote + '"</p><p>-' + author + '</p>';
+        });
+
+        }
+    }
