@@ -34,15 +34,16 @@ Before running this app you will need:
 - A YouTube Data v3 key from [Google Cloud Console](https://console.cloud.google.com)
 
 ### Installation
-1. Clone the repository
-- git clone https://github.com/quenskelia/mental-health-app
-2. Navigate into the project folder
-- cd mental-health-app
-3. Install dependencies
-- npm install
+1. Clone the repository - git clone https://github.com/quenskelia/mental-health-app
+
+2. Navigate into the project folder - cd mental-health-app
+
+3. Install dependencies - npm install
+
 4. Create a `.env` file in the root of the project and add your YouTube API key: YOUTUBE_API_KEY=your-key-here
-5. Start the server
-- node server.js
+
+5. Start the server - node server.js
+
 6. Open your browser and go to: http://localhost:3000
 
 ## Screenshots
