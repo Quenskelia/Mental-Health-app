@@ -95,6 +95,20 @@ app.get('/api/activity', function(req, res) {
         });
 });
 
+app.get('/api/video', function(req, res) {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=funny+videos&videoCategoryId=23&type=video&key=${process.env.YOUTUBE_API_KEY}`)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            res.json(data);
+        })
+        .catch(function(error) {
+            console.error('Error fetching video:', error);
+            res.status(500).json({ error: 'Failed to fetch video' });
+        });
+});
+
 initializeStorage();
 app.listen(port, function() {
     console.log(`Server is running on http://localhost:${port}`);

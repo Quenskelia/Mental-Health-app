@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded",()=>{
         .then(response => response.json())
         .then(data => {
             var user = data.users[0];
+            if(!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+            if (!user.moodHistory || user.moodHistory.length === 0){
+                window.location.href = 'index.html';
+                return;
+            }
             var moodHistory = user.moodHistory;
             document.getElementById('greeting').textContent = 'Hello ' + user.name + '! I hope your day is going well.';
             buildWeeklyOverview(moodHistory);
@@ -55,6 +63,21 @@ document.addEventListener("DOMContentLoaded",()=>{
         })
 
         }else if (mood === 'low'){
+            fetch('/api/video')
+            .then(response => response.json())
+            .then(data => {
+                var videoId = data.items[0].id.videoId;
+                var title = data.items[0].snippet.title;
+                var thumbnail = data.items[0].snippet.thumbnails.medium.url;
+                document.getElementById('suggestion-content').innerHTML = 
+                '<p>Here\'s something to cheer you up!</p>' +
+                '<a href="https://www.youtube.com/watch?v=' + videoId + '" target="_blank">' +
+                '<img src="' + thumbnail + '" alt="' + title + '">' +
+                '<p>' + title + '</p>' +
+                '</a>';
+                
+            
+            })
 
         }else if (mood === 'stressed'){
               fetch('/api/quote')

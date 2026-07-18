@@ -101,7 +101,7 @@ main {
 
 #greeting{
     text-align: center;
-    padding: 2rem;
+    padding:  1rem 2rem;
     font-size: 1.8rem;
 }
 
@@ -114,6 +114,7 @@ main {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-top: 1rem auto 0;
 }
 
 .day-card {
@@ -132,14 +133,76 @@ main {
     color: #9CA3AF;
 }
 
+#suggestion-box{
+    text-align: center;
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: #E9D5FF;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+}
+
+#suggestion-box h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#suggestion-content img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+#suggestion-content a:hover {
+    color: #7C3AED;
+}
+
+.main-page-body {
+    max-width: 800px;
+    width: 100%;
+    padding: 2rem;
+}
 
 
 @media (max-width: 600px) {
+    .empty-card {
+        font-size: 0.7rem;
+    }
+    
     body {
+        padding: 1rem;
+        align-items: flex-start;
+    }
+
+    #greeting {
+        font-size: 1.2rem;
         padding: 1rem;
     }
 
+    #week-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .day-card {
+        min-width: unset;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    #suggestion-box {
+        padding: 1rem;
+        width: 100%;
+    }
+    
     #name {
+        width: 100%;
+    }
+
+    .mood-buttons {
         width: 100%;
     }
 }
