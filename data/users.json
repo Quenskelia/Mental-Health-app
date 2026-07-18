@@ -1,13 +1,1 @@
-{
-  "users": [
-    {
-      "name": "Quentin",
-      "moodHistory": [
-        {
-          "mood": "happy",
-          "date": "2026-07-18"
-        }
-      ]
-    }
-  ]
-}
+{"users": []}
